@@ -13,7 +13,7 @@ import { conectDB } from "./src/config/db.js";
 
 const server = express();
 const port = process.env.PORT || 8080;
-app.listen(port, () => console.log("Server is running with " + port));
+server.listen(port, () => console.log("Server is running with " + port));
 
 //  middleware
 server.use(express.json());
