@@ -12,6 +12,12 @@ import {
   CircularProgress,
   Tooltip,
   TablePagination,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+  Button,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -31,16 +37,17 @@ interface Category {
 }
 
 const AdminProductList = () => {
-  // Hook calls at the top level
   const { data, isLoading } = useProductsQuery();
   const { mutate } = useProductMutation({ action: "DELETE" });
   const { data: categories, isLoading: loadingCategory } = UseCategory();
 
-  // State for pagination
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(6);
+  const [selectedCategory, setSelectedCategory] = React.useState("");
+  const [minPrice] = React.useState("");
+  const [maxPrice] = React.useState("");
+  const [sortOrder, setSortOrder] = React.useState("asc"); // State for sorting order
 
-  // Handle loading state
   if (isLoading || loadingCategory) return <CircularProgress />;
   if (!data) return <NotFound />;
 
@@ -59,8 +66,33 @@ const AdminProductList = () => {
     setPage(0);
   };
 
-  // Calculate paginated data
-  const paginatedData = data.slice(
+  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
+    setSelectedCategory(event.target.value);
+    setPage(0);
+  };
+
+  const handleSortOrderChange = () => {
+    setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+  };
+
+  const filteredData = data.filter((product: IdProducts) => {
+    const isInCategory =
+      selectedCategory === "" || product.category === selectedCategory;
+    const isInPriceRange =
+      (minPrice === "" || product.price >= parseFloat(minPrice)) &&
+      (maxPrice === "" || product.price <= parseFloat(maxPrice));
+    return isInCategory && isInPriceRange;
+  });
+
+  const sortedData = filteredData.sort((a: IdProducts, b: IdProducts) => {
+    if (sortOrder === "asc") {
+      return a.price - b.price;
+    } else {
+      return b.price - a.price;
+    }
+  });
+
+  const paginatedData = sortedData.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
@@ -78,24 +110,52 @@ const AdminProductList = () => {
         <Typography variant="h4" gutterBottom>
           Danh Sách Sản Phẩm
         </Typography>
-        <Tooltip title="Thêm sản phẩm" arrow>
-          <Link to={`/admin/productAdd`} style={{ textDecoration: "none" }}>
-            <IconButton
-              sx={{
-                background: "linear-gradient(45deg, #6a1b9a 30%, #ab47bc 90%)",
-                color: "white",
-                "&:hover": {
-                  background:
-                    "linear-gradient(45deg, #6a1b9a 40%, #ab47bc 100%)",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                },
-                transition: "background 0.3s, boxShadow 0.3s",
-              }}
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <FormControl sx={{ minWidth: 200, marginRight: 2 }}>
+            <InputLabel id="category-filter-label">Danh mục</InputLabel>
+            <Select
+              labelId="category-filter-label"
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+              label="Danh mục"
             >
-              <AddIcon />
-            </IconButton>
-          </Link>
-        </Tooltip>
+              <MenuItem value="">
+                <em>Tất cả</em>
+              </MenuItem>
+              {categories.map((category: Category) => (
+                <MenuItem key={category._id} value={category._id}>
+                  {category.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Tooltip title="Thêm sản phẩm" arrow>
+            <Link to={`/admin/productAdd`} style={{ textDecoration: "none" }}>
+              <IconButton
+                sx={{
+                  background:
+                    "linear-gradient(45deg, #6a1b9a 30%, #ab47bc 90%)",
+                  color: "white",
+                  "&:hover": {
+                    background:
+                      "linear-gradient(45deg, #6a1b9a 40%, #ab47bc 100%)",
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                  },
+                  transition: "background 0.3s, boxShadow 0.3s",
+                }}
+              >
+                <AddIcon />
+              </IconButton>
+            </Link>
+          </Tooltip>
+          <Button
+            variant="contained"
+            onClick={handleSortOrderChange}
+            sx={{ marginLeft: 2 }}
+          >
+            {sortOrder === "asc" ? "Giá tăng dần" : "Giá giảm dần"}
+          </Button>
+        </Box>
       </Box>
       <TableContainer component={Paper}>
         <Table>
@@ -169,7 +229,7 @@ const AdminProductList = () => {
         <TablePagination
           rowsPerPageOptions={[6, 10, 25]}
           component="div"
-          count={data.length}
+          count={filteredData.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
