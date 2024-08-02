@@ -14,6 +14,9 @@ import { conectDB } from "./src/config/db.js";
 const server = express();
 const port = process.env.PORT || 8080;
 server.listen(port, () => console.log("Server is running with " + port));
+const dbUrl =
+  process.env.DB_URI || "mongodb://127.0.0.1:27017/SoleStyleFootwear";
+connectMongoDB(dbUrl);
 
 //  middleware
 server.use(express.json());
