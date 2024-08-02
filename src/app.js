@@ -12,6 +12,8 @@ import routerCart from "./routers/cart.js";
 import orderRouter from "./routers/order.js";
 
 const server = express();
+const port = process.env.PORT || 8080;
+app.listen(port, () => console.log("Server is running with " + port));
 
 //  middleware
 server.use(express.json());
