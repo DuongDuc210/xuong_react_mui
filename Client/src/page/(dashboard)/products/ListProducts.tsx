@@ -12,10 +12,12 @@ import {
   CircularProgress,
   Tooltip,
   TablePagination,
+  Button,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
+import SortIcon from "@mui/icons-material/Sort";
 import { Link } from "react-router-dom";
 import useProductsQuery from "../../../hook/UseProductsQuerry";
 import useProductMutation from "../../../hook/UseProductMutation";
@@ -36,9 +38,10 @@ const AdminProductList = () => {
   const { mutate } = useProductMutation({ action: "DELETE" });
   const { data: categories, isLoading: loadingCategory } = UseCategory();
 
-  // State for pagination
+  // State for pagination and sorting
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(6);
+  const [sortOrder, setSortOrder] = React.useState<'asc' | 'desc'>('asc');
 
   // Handle loading state
   if (isLoading || loadingCategory) return <CircularProgress />;
@@ -59,8 +62,23 @@ const AdminProductList = () => {
     setPage(0);
   };
 
-  // Calculate paginated data
-  const paginatedData = data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const handleSort = (order: 'asc' | 'desc') => {
+    setSortOrder(order);
+  };
+
+  // Calculate paginated and sorted data
+  const sortedData = [...data].sort((a, b) => {
+    const priceA = a.discount > 0 ? a.price * (1 - a.discount / 100) : a.price;
+    const priceB = b.discount > 0 ? b.price * (1 - b.discount / 100) : b.price;
+
+    if (sortOrder === 'asc') {
+      return priceA - priceB;
+    } else {
+      return priceB - priceA;
+    }
+  });
+
+  const paginatedData = sortedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
     <Box sx={{ padding: 2 }}>
@@ -68,6 +86,18 @@ const AdminProductList = () => {
         <Typography variant="h4" gutterBottom>
           Danh Sách Sản Phẩm
         </Typography>
+        <Box>
+          <Tooltip title="Sắp xếp theo giá tăng dần" arrow>
+            <Button onClick={() => handleSort('asc')} variant="contained" color="primary" startIcon={<SortIcon />}>
+              Giá tăng dần
+            </Button>
+          </Tooltip>
+          <Tooltip title="Sắp xếp theo giá giảm dần" sx={{mx: 2}} arrow>
+            <Button onClick={() => handleSort('desc')} variant="contained" color="secondary" startIcon={<SortIcon />}>
+              Giá giảm dần
+            </Button>
+          </Tooltip>
+        </Box>
         <Tooltip title="Thêm sản phẩm" arrow>
           <Link to={`/admin/productAdd`} style={{ textDecoration: 'none' }}>
             <IconButton
