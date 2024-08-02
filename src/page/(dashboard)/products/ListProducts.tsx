@@ -48,7 +48,7 @@ const AdminProductList = () => {
     await mutate({ _id: id } as IdProducts);
   };
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
@@ -60,25 +60,36 @@ const AdminProductList = () => {
   };
 
   // Calculate paginated data
-  const paginatedData = data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const paginatedData = data.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
 
   return (
     <Box sx={{ padding: 2 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: 2,
+        }}
+      >
         <Typography variant="h4" gutterBottom>
           Danh Sách Sản Phẩm
         </Typography>
         <Tooltip title="Thêm sản phẩm" arrow>
-          <Link to={`/admin/productAdd`} style={{ textDecoration: 'none' }}>
+          <Link to={`/admin/productAdd`} style={{ textDecoration: "none" }}>
             <IconButton
               sx={{
-                background: 'linear-gradient(45deg, #6a1b9a 30%, #ab47bc 90%)',
-                color: 'white',
-                '&:hover': {
-                  background: 'linear-gradient(45deg, #6a1b9a 40%, #ab47bc 100%)',
-                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                background: "linear-gradient(45deg, #6a1b9a 30%, #ab47bc 90%)",
+                color: "white",
+                "&:hover": {
+                  background:
+                    "linear-gradient(45deg, #6a1b9a 40%, #ab47bc 100%)",
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                 },
-                transition: 'background 0.3s, boxShadow 0.3s',
+                transition: "background 0.3s, boxShadow 0.3s",
               }}
             >
               <AddIcon />

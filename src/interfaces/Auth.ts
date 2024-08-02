@@ -12,7 +12,7 @@ export interface LoginForm {
   password: string;
 }
 
-interface User {
-  name: string;
-  // Các thuộc tính khác nếu cần
-}
+// interface User {
+//   name: string;
+//   // Các thuộc tính khác nếu cần
+// }
