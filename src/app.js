@@ -1,7 +1,6 @@
 import express from "express";
 import { conectDB } from "./config/db.js";
 import AuthRouter from "./routers/auth.js";
-import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
 import ProductRouter from "./routers/ProductRouter.js";

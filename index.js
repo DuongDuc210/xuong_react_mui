@@ -1,6 +1,5 @@
 import express from "express";
 import AuthRouter from "./src/routers/auth.js";
-import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
 import ProductRouter from "./src/routers/ProductRouter.js";

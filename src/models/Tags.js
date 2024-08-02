@@ -1,4 +1,3 @@
-import { array } from "joi";
 import mongoose, { Schema } from "mongoose";
 
 const TagsSchema = new Schema(
