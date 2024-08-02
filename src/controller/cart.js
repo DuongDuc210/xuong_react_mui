@@ -1,6 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import Cart from "../models/cart";
-import products from "../models/products";
+import Cart from "../models/cart.js";
 
 // Lấy danh sách sản phẩm thuộc 1 user
 export const getCartByUserId = async (req, res) => {

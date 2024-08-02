@@ -1,5 +1,5 @@
-import { registerSchema } from "../Schemas/auth";
-import User from "../models/User";
+import { registerSchema } from "../Schemas/auth.js";
+import User from "../models/User.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { StatusCodes } from "http-status-codes";

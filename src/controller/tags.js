@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import Tags from "../models/Tags";
+import Tags from "../models/Tags.js";
 
 export const getTags = async (req, res) => {
   try {

@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
-import CategoryModel from "../models/Category";
-import products from "../models/products";
+import CategoryModel from "../models/Category.js";
+import products from "../models/products.js";
 
 export const getCategorys = async (req, res) => {
   try {

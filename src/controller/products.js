@@ -1,6 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import products from "../models/products";
-import Tags from "../models/Tags";
+import products from "../models/products.js";
 export const getProducts = async (req, res) => {
   // req là gửi yêu cầu lên
   // res là trả về

@@ -10,7 +10,7 @@ import {
   getValueAttributeById,
   updateAttribute,
   updateValueAttribute,
-} from "../controller/attribute";
+} from "../controller/attribute.js";
 
 const routerAttributes = Router();
 // Route để tạo mới một thuộc tính
