@@ -1,5 +1,4 @@
 import express from "express";
-import { conectDB } from "./config/db.js";
 import AuthRouter from "./routers/auth.js";
 import dotenv from "dotenv";
 import morgan from "morgan";
@@ -11,6 +10,7 @@ import routerAttributes from "./routers/attribute.js";
 import RouterSize from "./routers/Size.js";
 import routerCart from "./routers/cart.js";
 import orderRouter from "./routers/order.js";
+import { conectDB } from "./src/config/db.js";
 
 const server = express();
 
