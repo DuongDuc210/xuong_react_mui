@@ -1,16 +1,16 @@
 import express from 'express';
 import { conectDB } from './config/db';
-import AuthRouter from './routers/auth'
+import AuthRouter from './routers/auth.js'
 import dotenv from "dotenv";
 import morgan from 'morgan';
 import cors from "cors";
-import ProductRouter from './routers/ProductRouter';
-import categoryRouter from './routers/categoryRouter';
-import RouterTags from './routers/tags';
-import routerAttributes from './routers/attribute';
-import RouterSize from './routers/Size';
-import routerCart from './routers/cart';
-import orderRouter from "./routers/order";
+import ProductRouter from './routers/ProductRouter.js';
+import categoryRouter from './routers/categoryRouter.js';
+import RouterTags from './routers/tags.js';
+import routerAttributes from './routers/attribute.js';
+import RouterSize from './routers/Size.js';
+import routerCart from './routers/cart.js';
+import orderRouter from "./routers/order.js";
 
 const server = express();
 
@@ -18,7 +18,7 @@ const server = express();
 server.use(express.json());
 server.use(cors());
 server.use(morgan("dev"))
-    /// connect DB
+/// connect DB
 conectDB(process.env.DB_URL);
 //Router
 server.use(`/api`, ProductRouter);
