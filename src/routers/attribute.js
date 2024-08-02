@@ -1,6 +1,16 @@
 import { Router } from "express";
-import { createAttribute, createValueAttribute, deleteAttribute, deleteValueAttribute, getAllAttributes, getAllValueAttributes, getAttributeById, getValueAttributeById, updateAttribute, updateValueAttribute } from "../controller/attribute";
-
+import {
+  createAttribute,
+  createValueAttribute,
+  deleteAttribute,
+  deleteValueAttribute,
+  getAllAttributes,
+  getAllValueAttributes,
+  getAttributeById,
+  getValueAttributeById,
+  updateAttribute,
+  updateValueAttribute,
+} from "../controller/attribute";
 
 const routerAttributes = Router();
 // Route để tạo mới một thuộc tính

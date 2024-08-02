@@ -1,56 +1,61 @@
 import { array } from "joi";
 import mongoose from "mongoose";
-const productSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true,
-        lowercase: true,
+      type: String,
+      required: true,
+      lowercase: true,
     },
     category: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Category",
-        required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
     },
     slug: {
-        type: String,
-        unique: true,
+      type: String,
+      unique: true,
     },
     img: {
-        type: Array,
+      type: Array,
     },
     imgCategory: {
-        type: Array,
+      type: Array,
     },
     price: {
-        type: Number,
-        required: true,
-        default: 0,
+      type: Number,
+      required: true,
+      default: 0,
     },
     description: {
-        type: String,
+      type: String,
     },
 
     discount: {
-        type: Number,
-        default: 0,
+      type: Number,
+      default: 0,
     },
     featured: {
-        type: Boolean,
-        default: false,
+      type: Boolean,
+      default: false,
     },
-    tags: [{
+    tags: [
+      {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Tags",
         required: true,
-    }],
+      },
+    ],
     coutInStock: {
-        type: Number,
-        default: 0,
+      type: Number,
+      default: 0,
     },
     attributes: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Attribute",
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Attribute",
     },
-}, { timestamps: true, versionKey: false });
+  },
+  { timestamps: true, versionKey: false }
+);
 
 export default mongoose.model("Product", productSchema);
