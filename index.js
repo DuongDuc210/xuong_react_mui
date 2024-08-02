@@ -15,7 +15,8 @@ const server = express();
 const port = process.env.PORT || 8080;
 server.listen(port, () => console.log("Server is running with " + port));
 const dbUrl =
-  process.env.DB_URI || "mongodb://127.0.0.1:27017/SoleStyleFootwear";
+  process.env.DB_URI ||
+  "mongodb+srv://duonganhduc6a4:DzWWuIet8CD7pXFP@xuong-react-mui.kbq377m.mongodb.net/?retryWrites=true&w=majority&appName=xuong-react-mui";
 connectMongoDB(dbUrl);
 
 //  middleware
