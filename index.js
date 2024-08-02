@@ -1,15 +1,15 @@
 import express from "express";
-import AuthRouter from "./routers/auth.js";
+import AuthRouter from "./src/routers/auth.js";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
-import ProductRouter from "./routers/ProductRouter.js";
-import categoryRouter from "./routers/categoryRouter.js";
-import RouterTags from "./routers/tags.js";
-import routerAttributes from "./routers/attribute.js";
-import RouterSize from "./routers/Size.js";
-import routerCart from "./routers/cart.js";
-import orderRouter from "./routers/order.js";
+import ProductRouter from "./src/routers/ProductRouter.js";
+import categoryRouter from "./src/routers/categoryRouter.js";
+import RouterTags from "./src/routers/tags.js";
+import routerAttributes from "./src/routers/attribute.js";
+import RouterSize from "./src/routers/Size.js";
+import routerCart from "./src/routers/cart.js";
+import orderRouter from "./src/routers/order.js";
 import { conectDB } from "./src/config/db.js";
 
 const server = express();
