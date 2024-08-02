@@ -6,7 +6,8 @@
   "main": "app.js",
   "scripts": {
     "dev": "vite",
-    "server": "npx json-server db.json"
+    "server": "npx json-server db.json",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
