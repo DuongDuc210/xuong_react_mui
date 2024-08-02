@@ -1,8 +1,8 @@
 import { StatusCodes } from "http-status-codes";
-import CategoryModel from "../models/Category";
-import products from "../models/products";
+import CategoryModel from "../models/Category.js";
+import products from "../models/products.js";
 
-export const getCategorys = async(req, res) => {
+export const getCategorys = async (req, res) => {
     try {
         const categories = await CategoryModel.find();
         if (categories.length === 0) {
@@ -14,7 +14,7 @@ export const getCategorys = async(req, res) => {
     }
 }
 
-export const getCategorybyId = async(req, res) => {
+export const getCategorybyId = async (req, res) => {
     try {
         const product = await products.find({ category: req.params.id })
         const category = await CategoryModel.findOne({ _id: req.params.id });
@@ -30,7 +30,7 @@ export const getCategorybyId = async(req, res) => {
     }
 }
 
-export const addCategory = async(req, res) => {
+export const addCategory = async (req, res) => {
     try {
         const newCategory = await CategoryModel(req.body).save();
         res.status(StatusCodes.CREATED).json(newCategory);
@@ -39,7 +39,7 @@ export const addCategory = async(req, res) => {
     }
 }
 
-export const updateCategory = async(req, res) => {
+export const updateCategory = async (req, res) => {
     try {
         const updatedCategory = await CategoryModel.findOneAndUpdate({ _id: req.params.id },
             req.body, { new: true }
@@ -53,7 +53,7 @@ export const updateCategory = async(req, res) => {
     }
 }
 
-export const removeCategory = async(req, res) => {
+export const removeCategory = async (req, res) => {
     try {
         const deletedCategory = await CategoryModel.findOneAndDelete({ _id: req.params.id });
         if (!deletedCategory) {

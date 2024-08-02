@@ -1,6 +1,6 @@
 import express from 'express';
-import { addTags, getTags, getTagsbyId, removeTags, updateTags } from '../controller/tags';
-import { addSize, getSize, getSizebyId, removeSize, updateSize } from '../controller/size';
+import { addTags, getTags, getTagsbyId, removeTags, updateTags } from '../controller/tags.js';
+import { addSize, getSize, getSizebyId, removeSize, updateSize } from '../controller/size.js';
 
 const RouterSize = express.Router();
 

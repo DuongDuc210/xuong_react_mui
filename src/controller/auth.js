@@ -1,10 +1,10 @@
-import { registerSchema } from "../Schemas/auth";
-import User from "../models/User";
+import { registerSchema } from "../Schemas/auth.js";
+import User from "../models/User.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { StatusCodes } from "http-status-codes";
 
-export const singup = async(req, res) => {
+export const singup = async (req, res) => {
     //    lấy dữ liệu từ user gửi lên
     const { email, password, name, confirmPassword, age, avatar } = req.body;
     // kiểm tra xem dữ liệu có hợp lệ không
@@ -44,7 +44,7 @@ export const singup = async(req, res) => {
         user,
     });
 };
-export const signin = async(req, res) => {
+export const signin = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
@@ -66,7 +66,7 @@ export const signin = async(req, res) => {
         token,
     });
 };
-export const checkrole = async(req, res, next) => {
+export const checkrole = async (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1];
         const { id } = jwt.verify(token, "123456");
@@ -79,4 +79,4 @@ export const checkrole = async(req, res, next) => {
         console.log(error);
     }
 }
-export const logout = async(req, res) => {};
+export const logout = async (req, res) => { };

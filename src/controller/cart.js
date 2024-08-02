@@ -1,9 +1,9 @@
 import { StatusCodes } from "http-status-codes";
-import Cart from "../models/cart";
-import products from "../models/products";
+import Cart from "../models/cart.js";
+import products from "../models/products.js";
 
 // Lấy danh sách sản phẩm thuộc 1 user
-export const getCartByUserId = async(req, res) => {
+export const getCartByUserId = async (req, res) => {
     const { userId } = req.params;
     try {
         const cart = await Cart.findOne({ userId }).populate("products.productId");
@@ -20,10 +20,10 @@ export const getCartByUserId = async(req, res) => {
             })),
         };
         return res.status(StatusCodes.OK).json(cartData);
-    } catch (error) {}
+    } catch (error) { }
 };
 // Thêm sản phẩm vào giỏ hàng
-export const addItemToCart = async(req, res) => {
+export const addItemToCart = async (req, res) => {
     const { userId, productId, quantity, color, price } = req.body;
     try {
         // kiểm tra giỏ hàng có tồn tại chưa? dựa theo UserId
@@ -56,7 +56,7 @@ export const addItemToCart = async(req, res) => {
 };
 // Xóa sản phẩm trong giỏ hàng thuộc 1 user
 
-export const removeFromCart = async(req, res) => {
+export const removeFromCart = async (req, res) => {
     const { userId, productId } = req.body;
     try {
         let cart = await Cart.findOne({ userId });
@@ -82,7 +82,7 @@ export const removeFromCart = async(req, res) => {
 };
 
 // Cập nhật số lượng sản phẩm trong giỏ hàng thuộc 1 user
-export const updateProductQuantity = async(req, res) => {
+export const updateProductQuantity = async (req, res) => {
     const { userId, productId, quantity } = req.body;
     try {
         let cart = await Cart.findOne({ userId });
@@ -103,10 +103,10 @@ export const updateProductQuantity = async(req, res) => {
         product.quantity = quantity;
         await cart.save();
         return res.status(StatusCodes.OK).json({ cart });
-    } catch (error) {}
+    } catch (error) { }
 };
 // Tăng số lượng của sản phẩm trong giỏ hàng
-export const increaseProductQuantity = async(req, res) => {
+export const increaseProductQuantity = async (req, res) => {
     const { userId, productId } = req.body;
 
     try {
@@ -143,7 +143,7 @@ export const increaseProductQuantity = async(req, res) => {
 };
 
 // Giảm số lượng của sản phẩm trong giỏ hàng
-export const decreaseProductQuantity = async(req, res) => {
+export const decreaseProductQuantity = async (req, res) => {
     const { userId, productId } = req.body;
     try {
         let cart = await Cart.findOne({ userId });

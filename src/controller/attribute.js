@@ -1,6 +1,6 @@
-import Attribute, { ValueAttributeModel } from "../models/attribute";
+import Attribute, { ValueAttributeModel } from "../models/attribute.js";
 // Controller để tạo mới một thuộc tính
-export const createAttribute = async(req, res) => {
+export const createAttribute = async (req, res) => {
     try {
         const { name } = req.body;
         const attribute = new Attribute({
@@ -14,7 +14,7 @@ export const createAttribute = async(req, res) => {
 };
 
 // Controller để lấy tất cả các thuộc tính
-export const getAllAttributes = async(req, res) => {
+export const getAllAttributes = async (req, res) => {
     try {
         const attributes = await Attribute.find().populate("values");
         res.json(attributes);
@@ -24,7 +24,7 @@ export const getAllAttributes = async(req, res) => {
 };
 
 // Controller để lấy một thuộc tính theo ID
-export const getAttributeById = async(req, res) => {
+export const getAttributeById = async (req, res) => {
     try {
         const attribute = await Attribute.findById(req.params.id).populate({
             path: 'values',
@@ -40,7 +40,7 @@ export const getAttributeById = async(req, res) => {
 };
 
 // Controller để cập nhật một thuộc tính
-export const updateAttribute = async(req, res) => {
+export const updateAttribute = async (req, res) => {
     try {
         const { name } = req.body;
         const attribute = await Attribute.findById(req.params.id);
@@ -56,7 +56,7 @@ export const updateAttribute = async(req, res) => {
 };
 
 // Controller để xóa một thuộc tính
-export const deleteAttribute = async(req, res) => {
+export const deleteAttribute = async (req, res) => {
     try {
         const attribute = await Attribute.findByIdAndDelete(req.params.id);
         res.json({ message: "Attribute deleted" });
@@ -68,7 +68,7 @@ export const deleteAttribute = async(req, res) => {
 //==================================== VALUE ============================================
 
 // Controller để tạo mới một giá trị của thuộc tính
-export const createValueAttribute = async(req, res) => {
+export const createValueAttribute = async (req, res) => {
     try {
         const { name, price, quantity, size } = req.body;
         const attribute = await Attribute.findById(req.params.id);
@@ -91,7 +91,7 @@ export const createValueAttribute = async(req, res) => {
 };
 
 // Controller để lấy tất cả các giá trị của thuộc tính
-export const getAllValueAttributes = async(req, res) => {
+export const getAllValueAttributes = async (req, res) => {
     try {
         const values = await ValueAttributeModel.find();
         res.json(values);
@@ -101,7 +101,7 @@ export const getAllValueAttributes = async(req, res) => {
 };
 
 // Controller để lấy một giá trị của thuộc tính theo ID
-export const getValueAttributeById = async(req, res) => {
+export const getValueAttributeById = async (req, res) => {
     try {
         const value = await ValueAttributeModel.findById(req.params.id);
         if (!value) {
@@ -114,7 +114,7 @@ export const getValueAttributeById = async(req, res) => {
 };
 
 // Controller để cập nhật một giá trị của thuộc tính
-export const updateValueAttribute = async(req, res) => {
+export const updateValueAttribute = async (req, res) => {
     try {
         const { name, price, quantity, size } = req.body;
         const value = await ValueAttributeModel.findById(req.params.id);
@@ -133,7 +133,7 @@ export const updateValueAttribute = async(req, res) => {
 };
 
 // Controller để xóa một giá trị của thuộc tính
-export const deleteValueAttribute = async(req, res) => {
+export const deleteValueAttribute = async (req, res) => {
     try {
         const value = await ValueAttributeModel.findByIdAndDelete(req.params.id);
         res.json({ message: "ValueAttribute deleted" });

@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
-import products from "../models/products";
-import Tags from "../models/Tags";
-export const getProducts = async(req, res) => {
+import products from "../models/products.js";
+import Tags from "../models/Tags.js";
+export const getProducts = async (req, res) => {
     // req là gửi yêu cầu lên 
     // res là trả về 
     try {
@@ -16,7 +16,7 @@ export const getProducts = async(req, res) => {
 
     }
 }
-export const getProductsbyId = async(req, res) => {
+export const getProductsbyId = async (req, res) => {
     // req là gửi yêu cầu lên 
     // res là trả về 
 
@@ -31,7 +31,7 @@ export const getProductsbyId = async(req, res) => {
 
     }
 }
-export const addProducts = async(req, res) => {
+export const addProducts = async (req, res) => {
     try {
         const data = await products(req.body).save();
         res.status(StatusCodes.CREATED).json(data);
@@ -41,7 +41,7 @@ export const addProducts = async(req, res) => {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message })
     }
 }
-export const updateProducts = async(req, res) => {
+export const updateProducts = async (req, res) => {
 
     try {
         const data = await products.findOneAndUpdate({ _id: req.params.id }, req.body, {
@@ -56,7 +56,7 @@ export const updateProducts = async(req, res) => {
 
     }
 }
-export const remove = async(req, res) => {
+export const remove = async (req, res) => {
 
     try {
         const data = await products.findOneAndDelete({ _id: req.params.id });

@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
-import Tags from "../models/Tags";
+import Tags from "../models/Tags.js";
 
-export const getTags = async(req, res) => {
+export const getTags = async (req, res) => {
     try {
         const foundTags = await Tags.find();
         if (foundTags.length === 0) {
@@ -13,7 +13,7 @@ export const getTags = async(req, res) => {
     }
 }
 
-export const getTagsbyId = async(req, res) => {
+export const getTagsbyId = async (req, res) => {
     try {
         const foundTags = await Tags.findOne({ _id: req.params.id });
         if (!foundTags) {
@@ -27,7 +27,7 @@ export const getTagsbyId = async(req, res) => {
     }
 }
 
-export const addTags = async(req, res) => {
+export const addTags = async (req, res) => {
     try {
         const newTags = await Tags(req.body).save();
         res.status(StatusCodes.CREATED).json(newTags);
@@ -36,7 +36,7 @@ export const addTags = async(req, res) => {
     }
 }
 
-export const updateTags = async(req, res) => {
+export const updateTags = async (req, res) => {
     try {
         const updatedTags = await Tags.findOneAndUpdate({ _id: req.params.id },
             req.body, { new: true }
@@ -50,7 +50,7 @@ export const updateTags = async(req, res) => {
     }
 }
 
-export const removeTags = async(req, res) => {
+export const removeTags = async (req, res) => {
     try {
         const deletedTags = await Tags.findOneAndDelete({ _id: req.params.id });
         if (!deletedTags) {

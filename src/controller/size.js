@@ -1,8 +1,8 @@
 import { StatusCodes } from "http-status-codes";
-import Tags from "../models/Tags";
-import Size from "../models/Size";
+import Tags from "../models/Tags.js";
+import Size from "../models/Size.js";
 
-export const getSize = async(req, res) => {
+export const getSize = async (req, res) => {
     try {
         const foundSize = await Size.find();
         if (foundSize.length === 0) {
@@ -14,7 +14,7 @@ export const getSize = async(req, res) => {
     }
 }
 
-export const getSizebyId = async(req, res) => {
+export const getSizebyId = async (req, res) => {
     try {
         const foundSize = await Size.findOne({ _id: req.params.id });
         if (!foundSize) {
@@ -28,7 +28,7 @@ export const getSizebyId = async(req, res) => {
     }
 }
 
-export const addSize = async(req, res) => {
+export const addSize = async (req, res) => {
     try {
         const newSizes = await Size(req.body).save();
         res.status(StatusCodes.CREATED).json(newSizes);
@@ -37,7 +37,7 @@ export const addSize = async(req, res) => {
     }
 }
 
-export const updateSize = async(req, res) => {
+export const updateSize = async (req, res) => {
     try {
         const updateSize = await Size.findOneAndUpdate({ _id: req.params.id },
             req.body, { new: true }
@@ -51,7 +51,7 @@ export const updateSize = async(req, res) => {
     }
 }
 
-export const removeSize = async(req, res) => {
+export const removeSize = async (req, res) => {
     try {
         const deleteSize = await Size.findOneAndDelete({ _id: req.params.id });
         if (!deleteSize) {
