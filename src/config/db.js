@@ -1,9 +1,15 @@
-import mongoose from "mongoose"
+// src/config/db.js
+import mongoose from 'mongoose';
 
-export const conectDB = async(uri) => {
+export const connectDB = async (uri) => {
     try {
-        mongoose.connect(uri)
+        await mongoose.connect(uri, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log('MongoDB connected...');
     } catch (error) {
-        console.log(error);
+        console.error('MongoDB connection error:', error);
+        process.exit(1); // Exit process with failure
     }
-}
+};

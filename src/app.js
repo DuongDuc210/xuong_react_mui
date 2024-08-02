@@ -1,5 +1,5 @@
 import express from 'express';
-import { conectDB } from './config/db';
+import { conectDB } from './config/db.js';
 import AuthRouter from './routers/auth.js'
 import dotenv from "dotenv";
 import morgan from 'morgan';
@@ -15,11 +15,12 @@ import orderRouter from "./routers/order.js";
 const server = express();
 
 //  middleware
+const MONGO_URI = "mongodb://127.0.0.1:27017/SoleStyleFootwear"
 server.use(express.json());
 server.use(cors());
 server.use(morgan("dev"))
 /// connect DB
-conectDB(process.env.DB_URL);
+conectDB(MONGO_URI);
 //Router
 server.use(`/api`, ProductRouter);
 server.use(`/api/v1`, AuthRouter);
