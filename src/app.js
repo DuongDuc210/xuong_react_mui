@@ -31,4 +31,4 @@ server.use(`/api/v1`, RouterSize);
 server.use(`/api/v1`, routerCart);
 server.use("/api/v1", orderRouter);
 
-export const viteNodeApp = server;
+app.listen(port, () => console.log("Server is running with " + port));
