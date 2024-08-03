@@ -47,10 +47,7 @@ const productSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    attributes: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Attribute",
-    },
+
 }, { timestamps: true, versionKey: false });
 
 export default mongoose.model("Product", productSchema);
