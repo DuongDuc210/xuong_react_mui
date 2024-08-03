@@ -7,24 +7,23 @@ import ProductRouter from './src/routers/ProductRouter.js';
 import { conectDB } from './src/config/db.js';
 import categoryRouter from './src/routers/categoryRouter.js';
 import RouterTags from './src/routers/tags.js';
-import routerAttributes from './src/routers/attribute.js';
 import RouterSize from './src/routers/Size.js';
 import routerCart from './src/routers/cart.js';
 import orderRouter from "./src/routers/order.js";
 const server = express();
-
 //  middleware
+const MONGO_URI = process.env.DB_URI || "mongodb://127.0.0.1:27017/SoleStyleFootwear"
+
 server.use(express.json());
 server.use(cors());
 server.use(morgan("dev"))
 /// connect DB
-conectDB(process.env.DB_URL);
+conectDB(MONGO_URI);
 //Router
 server.use(`/api`, ProductRouter);
 server.use(`/api/v1`, AuthRouter);
 server.use(`/api/v1`, categoryRouter);
 server.use(`/api/v1`, RouterTags);
-server.use(`/api/v1`, routerAttributes);
 server.use(`/api/v1`, RouterSize);
 server.use(`/api/v1`, routerCart);
 server.use("/api/v1", orderRouter);

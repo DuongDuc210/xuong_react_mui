@@ -15,7 +15,7 @@ import orderRouter from "./routers/order.js";
 const server = express();
 
 //  middleware
-const MONGO_URI = "mongodb://127.0.0.1:27017/SoleStyleFootwear"
+const MONGO_URI = process.env.DB_URI || "mongodb://127.0.0.1:27017/SoleStyleFootwear"
 server.use(express.json());
 server.use(cors());
 server.use(morgan("dev"))
