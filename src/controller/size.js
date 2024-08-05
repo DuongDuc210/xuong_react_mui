@@ -1,5 +1,4 @@
 import { StatusCodes } from "http-status-codes";
-import Tags from "../models/Tags.js";
 import Size from "../models/Size.js";
 
 export const getSize = async (req, res) => {
