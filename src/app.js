@@ -9,7 +9,8 @@ import categoryRouter from './routers/categoryRouter.js';
 import RouterSize from './routers/Size.js';
 import routerCart from './routers/cart.js';
 import orderRouter from "./routers/order.js";
-
+const app = express();
+const port = process.env.PORT || 8080;
 const server = express();
 
 //  middleware
