@@ -37,11 +37,6 @@ const productSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    tags: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Tags",
-        required: true,
-    }],
     coutInStock: {
         type: Number,
         default: 0,
