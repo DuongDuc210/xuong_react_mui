@@ -10,6 +10,8 @@ import RouterSize from './src/routers/Size.js';
 import routerCart from './src/routers/cart.js';
 import orderRouter from "./src/routers/order.js";
 const server = express();
+const app = express();
+const port = process.env.PORT || 8080;
 //  middleware
 const MONGO_URI = process.env.DB_URI || "mongodb://127.0.0.1:27017/SoleStyleFootwear"
 
